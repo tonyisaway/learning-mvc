@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+}
+
+@section scripts {
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/ProductController.js"></script>   
+<script src="~/Scripts/ProductService.js"></script>
+<link href="~/Content/Product.css" rel="stylesheet" />
+}
+<div ng-app="productsapp">
+@*<div>*@
+    <div ng-controller="productsController">
+        <div>
+            <h2>Angular JS CRUD Operations with MVC5 API</h2>
+            <div>{{ error }}</div>
+            <h3>List of Products</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th hidden="hidden">ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in products">
+                        <td hidden="hidden">{{ product.Id }}</td>
+                        <td>{{ product.Name }}</td>
+                        <td>{{ product.Category }}</td>
+                        <td>{{ product.Price }}</td>
+                        <td>
+                            <button ng-click="editProduct(products[$index])">Edit</button>
+                            <button ng-click="deleteProduct($index)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <hr />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td hidden="hidden"></td>
+                        <td>Total:</td>
+                        <td></td>
+                        <td><label ng-bind="total() | currency:'&pound;':2"></label></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="product-views">
+            <div ng-show="product.Id != '' ">
+                <h2>Update Product</h2>
+                <div hidden="hidden">
+                    <input type="text" ng-model="product.Id" />
+                </div>
+                <div>
+                    <label for="updatename">Name</label>
+                    <input type="text" id="updatename" ng-model="product.Name" />
+                </div>
+                <div>
+                    <label for="updatecategory">Category</label>
+                    <input type="text" id="updatecategory" ng-model="product.Category" />
+                </div>
+                <div>
+                    <label for="updateprice">Price</label>
+                    <input type="text" id="updateprice" ng-model="product.Price" />
+                </div>
+                <div>
+                    <button ng-click="updateProduct()">Update</button>
+                    <button ng-click="cancelEdit()">Cancel</button>
+                </div>
+            </div>
+            <div ng-hide="product.Id != '' ">
+                <h2>Add New Product</h2>
+                <div>
+                    <label for="addnewname">Name</label>
+                    <input type="text" id="addnewname" ng-model="product.Name" />
+                </div>
+                <div>
+                    <label for="addnewcategory">Category</label>
+                    <input type="text" id="addnewcategory" ng-model="product.Category" />
+                </div>
+                <div>
+                    <label for="addnewprice">Price</label>
+                    <input type="text" id="addnewprice" ng-model="product.Price" />
+                </div>
+                <div>
+                    <button ng-click="saveProduct()">Save</button>
+                    <button ng-click="clearAddNew()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
