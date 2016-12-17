@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OdeToFood.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,14 +11,18 @@ namespace OdeToFood.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var model = new AboutModel();
+            model.Name = "Scott";
+            model.Location = "Maryland, USA";
 
-            return View();
+            return View(model);
         }
 
         public ActionResult Contact()
