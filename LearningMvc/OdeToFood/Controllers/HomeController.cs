@@ -1,26 +1,31 @@
-﻿using OdeToFood.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
+﻿
 namespace OdeToFood.Controllers
 {
+    using Models;
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            var controller = RouteData.Values["controller"];
+            var action = RouteData.Values["action"];
+            var id = RouteData.Values["id"];
+
+            var message = string.Format("{0}::{1} {2}", controller, action, id);
+
+            ViewBag.Message = message; //"Modify this template to jump-start your ASP.NET MVC application.";
 
             return View();
         }
 
         public ActionResult About()
         {
-            var model = new AboutModel();
-            model.Name = "Scott";
-            model.Location = "Maryland, USA";
+            var model = new AboutModel
+            {
+                Name = "Scott",
+                Location = "Maryland, USA"
+            };
 
             return View(model);
         }
